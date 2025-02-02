@@ -43,15 +43,15 @@
                     <a class="d-flex align-items-center" href="{{ route('admin.dashboard') }}">
                         <i data-feather="home">
                         </i>
-                        <span class="menu-title text-truncate"data-i18n="Home">الرئيسية</span>
+                        <span class="menu-title text-truncate"data-i18n="Home">HOME</span>
                     </a>
                 </li>
                 
-                <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }} nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('admin.dashboard') }}">
+                <li class="{{ request()->routeIs('admin.products.index') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('admin.products.index') }}">
                         <i data-feather="home">
                         </i>
-                        <span class="menu-title text-truncate"data-i18n="Home">ا</span>
+                        <span class="menu-title text-truncate"data-i18n="Home">Products</span>
                     </a>
                 </li>
             </ul>

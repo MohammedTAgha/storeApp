@@ -14,7 +14,7 @@ Route::get('/', function () {
 Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
-    'namespace' => 'Admin',
+    // 'namespace' => 'Admin',
     // 'middleware' => ['auth', 'is_admin']
 ], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

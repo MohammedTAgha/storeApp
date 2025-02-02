@@ -21,8 +21,9 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/vendors/css/vendors-rtl.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/vendors/css/charts/apexcharts.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('assets/app-assets/vendors/css/extensions/toastr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/vendors/css/extensions/toastr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/vendors/css/extensions/nouislider.min.css') }}">
+
     <!-- END: Vendor CSS-->
 
    
@@ -32,6 +33,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/bootstrap-extended.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/colors.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css-rtl/themes/bordered-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/themes/dark-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/themes/semi-dark-layout.css') }}">
 
@@ -41,6 +43,7 @@
      href="{{ asset('assets/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
  <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/pages/app-chat.css') }}">
  <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/pages/app-chat-list.css') }}">
+ <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/pages/app-ecommerce.css') }}">
  <!-- END: Page CSS-->
 
     <!-- BEGIN: Page CSS-->
