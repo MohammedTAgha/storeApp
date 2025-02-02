@@ -39,11 +39,21 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                {{-- <li class="active nav-item"><a class="d-flex align-items-center" href="index.html"><i
-                            data-feather="home"></i><span class="menu-title text-truncate"
-                            data-i18n="Home">الرئيسية</span></a>
-                </li> --}}
-   
+                <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('admin.dashboard') }}">
+                        <i data-feather="home">
+                        </i>
+                        <span class="menu-title text-truncate"data-i18n="Home">الرئيسية</span>
+                    </a>
+                </li>
+                
+                <li class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('admin.dashboard') }}">
+                        <i data-feather="home">
+                        </i>
+                        <span class="menu-title text-truncate"data-i18n="Home">ا</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
