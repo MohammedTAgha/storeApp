@@ -3,7 +3,7 @@
 @include('layouts.menu')
 
     <!-- BEGIN: Content-->
-    <div class="app-content content ">
+    <div class="app-content   content ecommerce-application ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
@@ -51,6 +51,8 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="{{ asset('assets/app-assets/js/scripts/pages/app-ecommerce.js')}}"></script>
+
     <!-- END: Page JS-->
 
     <script>
