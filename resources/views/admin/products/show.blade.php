@@ -23,7 +23,7 @@
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                         </div>
-                        <span class="text-muted">Category: <a href="#" class="fw-bold">{{ $product->category->name }}</a></span>
+                        <span class="text-muted">Category: <a href="{{ route('admin.categories.show', $product->category->id) }}" class="fw-bold">{{ $product->category->name }}</a></span>
                         <div class="mt-1">
                             <h4 class="item-price text-primary">${{ number_format($product->price, 2) }}</h4>
                         </div>
