@@ -34,13 +34,27 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|',
             'stock_quantity' => 'required|integer',
-            'image_url' => 'nullable|url',
+            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+          // Handle image upload
+    if ($request->hasFile('image_url')) {
+        $image = $request->file('image_url');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads/products'), $imageName);
+        $imagePath = 'uploads/products/' . $imageName;
+    }
        try {
-        Product::create($request->all());
+        Product::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'stock_quantity' => $request->stock_quantity,
+            'image_url' => $imagePath ?? null,
+        ]);
        } catch (\Exception $e) {
         return redirect()->route('admin.products.index')->with('eroor', 'eroor creating product '.$e->getMessage());
        }
