@@ -1,3 +1,5 @@
+<!-- resources/views/frontend/products/index.blade.php -->
+
 @extends('layouts.frontend.app')
 
 @section('content')
@@ -20,7 +22,6 @@
     </div>
 </div>
 
-
 <div class="shop-main-wrapper section-padding">
     <div class="container">
         <div class="row">
@@ -34,16 +35,13 @@
                         </div>
                         <div class="sidebar-body">
                             <ul class="color-list">
-                                <li><a href="#">Mens <span>(10)</span></a></li>
-                                <li><a href="#">Womens <span>(05)</span></a></li>
-                                <li><a href="#">Sports <span>(15)</span></a></li>
-                                <li><a href="#">Fabric <span>(12)</span></a></li>
-                                <li><a href="#">Leather <span>(20)</span></a></li>
+                                @foreach($categories as $category)
+                                    <li><a  href="{{ route('admin.categories.show', $category->id) }}">{{ $category->name }} <span>({{ $category->products_count }})</span></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                     <!-- single sidebar end -->
- 
                 </div>
             </div>
             <!-- sidebar area end -->
@@ -74,10 +72,10 @@
                                             <option value="date">Rating (Lowest)</option>
                                             <option value="price-asc">Model (A - Z)</option>
                                             <option value="price-asc">Model (Z - A)</option>
-                                        </select><div class="nice-select" tabindex="0"><span class="current">Relevance</span><ul class="list"><li data-value="trending" class="option selected">Relevance</li><li data-value="sales" class="option">Name (A - Z)</li><li data-value="sales" class="option">Name (Z - A)</li><li data-value="rating" class="option">Price (Low &gt; High)</li><li data-value="date" class="option">Rating (Lowest)</li><li data-value="price-asc" class="option">Model (A - Z)</li><li data-value="price-asc" class="option">Model (Z - A)</li></ul></div>
+                                        </select>
                                     </div>
                                     <div class="product-amount">
-                                        <p>Showing 1–16 of 21 results</p>
+                                        <p>Showing {{ $products->firstItem() }}–{{ $products->lastItem() }} of {{ $products->total() }} results</p>
                                     </div>
                                 </div>
                             </div>
@@ -87,44 +85,17 @@
 
                     <!-- product item list start -->
                     <div class="shop-product-wrap grid-view row mbn-50">
-                        <div class="col-lg-4 col-sm-6">
-                            <!-- product grid item start -->
-                            <div class="product-item mb-53">
-                                <div class="product-thumb">
-                                    <a href="product-details.html">
-                                        <img src="assets/img/product/product-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <h5 class="product-name">
-                                        <a href="product-details.html">Leather Mens Slipper</a>
-                                    </h5>
-                                    <div class="price-box">
-                                        <span class="price-regular">$80.00</span>
-                                        <span class="price-old"><del>$70.00</del></span>
-                                    </div>
-                                    <div class="product-action-link">
-                                        <a href="#" data-toggle="tooltip" title="" data-original-title="Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                        <a href="#" data-toggle="tooltip" title="" data-original-title="Add To Cart"><i class="ion-bag"></i></a>
-                                        <a href="#" data-toggle="modal" data-target="#quick_view"> <span data-toggle="tooltip" title="" data-original-title="Quick View"><i class="ion-ios-eye-outline"></i></span> </a>
-                                    </div>
-                                </div>
+                        @foreach($products as $product)
+                            <div class="col-lg-4 col-sm-6">
+                                @include('components.front-product', ['product' => $product])
                             </div>
-                            <!-- product grid item end -->
-                        </div>
-                         
+                        @endforeach
                     </div>
                     <!-- product item list end -->
 
                     <!-- start pagination area -->
                     <div class="paginatoin-area text-center mt-45">
-                        <ul class="pagination-box">
-                            <li><a class="Previous" href="#"><i class="ion-ios-arrow-left"></i></a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a class="Next" href="#"><i class="ion-ios-arrow-right"></i></a></li>
-                        </ul>
+                        {{ $products->links('pagination::bootstrap-4') }}
                     </div>
                     <!-- end pagination area -->
                 </div>

@@ -6,11 +6,11 @@
 
     <!--=======================Javascript============================-->
     <!--=== All Vendor Js ===-->
-    <script src="{{asset('frontend/assest/js/vendor.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/vendor.js')}}"></script>
     <!--=== All Plugins Js ===-->
-    <script src="{{asset('frontend/assest/js/plugins.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/plugins.js')}}"></script>
     <!--=== Active Js ===-->
-    <script src="{{asset('frontend/assest/js/active.js')}}"></script>
+    <script src="{{asset('frontend/assets/js/active.js')}}"></script>
 </body>
 
 </html>
