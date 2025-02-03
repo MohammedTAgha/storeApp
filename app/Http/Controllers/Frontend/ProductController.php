@@ -19,6 +19,9 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return view('frontend.products.show', compact('product'));
+        $category = $product->category->id;
+        $related = Product::where('category_id', $category)->get();
+        // dd($related);
+        return view('frontend.products.show', compact('product','related'));
     }
 }
