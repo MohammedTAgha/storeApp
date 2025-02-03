@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -82,10 +83,27 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'stock_quantity' => 'required|integer',
-            'image_url' => 'nullable|url',
+           'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:19048',
         ]);
 
-        $product->update($request->all());
+        if ($request->hasFile('image_url')) {
+            $image = $request->file('image_url');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/products'), $imageName);
+            $imagePath = 'uploads/products/' . $imageName;
+            Log::alert('image url');
+            Log::alert($imagePath);
+
+        }
+        // $request->image_url=$imagePath;
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'stock_quantity' => $request->stock_quantity,
+            'image_url' => $imagePath ?? null,
+        ]);
 
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
     }
