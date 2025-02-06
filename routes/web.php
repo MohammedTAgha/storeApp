@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('frontend.home.index');
 // });
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 Route::group([
     'prefix' => 'admin',
@@ -34,7 +35,7 @@ Route::group([
 
 Route::group(['namespace' => 'Frontend'], function () {
     // Home
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    // Route::get('/', [HomeController::class, 'index'])->name('home');
     // Route::get('/products', [FrontendProductController::class, 'index'])->name('products');
 
     // Products
