@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
-        //
+        $cart = auth()->user()->cart;
+        return view('frontend.cart.index', compact('cart'));
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
