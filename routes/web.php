@@ -19,7 +19,7 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
     // 'namespace' => 'Admin',
-    // 'middleware' => ['auth', 'is_admin']
+    'middleware' => ['auth', 'is_admin']
 ], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
@@ -64,3 +64,17 @@ Route::group(['namespace' => 'Frontend'], function () {
     // Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     // Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 });
+
+
+Route::get('/login', function () {
+    return view('auth.login')->name('login');
+}); 
+// for all
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])   ;
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+// require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
