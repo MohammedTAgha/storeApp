@@ -60,7 +60,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/app-assets/css/custom-rtl.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/assets/css/style-rtl.css') }}">
     <!-- END: Custom CSS-->
-
+ <!-- Scripts -->
+ @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <!-- END: Head-->
 
