@@ -41,10 +41,10 @@
                         <a class="dropdown-item" href="#"><i class="me-50"data-feather="settings"></i>
                             Settings
                         </a>
-                        {{-- <a class="dropdown-item" href="{{route('logout')}}">
+                        <a class="dropdown-item" href="{{route('logout')}}">
                             <i class="me-50" data-feather="power"></i>
                             Logout
-                        </a> --}}
+                        </a>
                     </div>
                 </li>
             </ul>
