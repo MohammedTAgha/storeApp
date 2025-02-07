@@ -41,10 +41,13 @@
                         <a class="dropdown-item" href="#"><i class="me-50"data-feather="settings"></i>
                             Settings
                         </a>
-                        <a class="dropdown-item" href="{{route('logout')}}">
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                        <button type="submit" class="dropdown-item" href="{{route('logout')}}">
                             <i class="me-50" data-feather="power"></i>
                             Logout
-                        </a>
+                        </button>
+                    </form>
                     </div>
                 </li>
             </ul>

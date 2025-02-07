@@ -9,7 +9,6 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 // Route::get('/', function () {
 //     return view('frontend.home.index');
 // });
@@ -65,12 +64,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     // Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 });
 
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])
-    ->middleware('guest')
-    ->name('login');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-    ->middleware('guest');
 // Route::get('/login', function () {
 //     return view('auth.login')->name('login');
 // }); 
@@ -81,5 +75,5 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-// require __DIR__.'/auth.php';
-// require __DIR__.'/auth.php';
+
+require __DIR__.'/auth.php';
