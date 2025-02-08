@@ -8,12 +8,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $orders = auth()->user()->orders()->with('orderItems.product')->paginate(10);
+        $user = Auth::user();
+        $orders = Order::with('orderItems.product')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+        // dd($orders);
         return view('frontend.orders.index', compact('orders'));
     }
 

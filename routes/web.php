@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
 use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
 use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
@@ -49,9 +50,9 @@ Route::group(['namespace' => 'Frontend'], function () {
       Route::delete('/cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
   
       // Orders
-      Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-      Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
-      Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+      Route::get('/orders', [FrontendOrderController::class, 'index'])->name('orders.index');
+      Route::post('/orders', [FrontendOrderController::class, 'store'])->name('orders.store');
+      Route::get('/orders/{order}', [FrontendOrderController::class, 'show'])->name('orders.show');
     // Cart
     // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     // Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
