@@ -54,6 +54,13 @@ Route::group(['namespace' => 'Frontend'], function () {
       Route::get('/checkout', [FrontendOrderController::class, 'checkout'])->name('orders.checkout');
       Route::post('/orders', [FrontendOrderController::class, 'store'])->name('orders.store');
       Route::get('/orders/{order}', [FrontendOrderController::class, 'show'])->name('orders.show');
+
+      Route::get('/orders/download/excel', [\App\Http\Controllers\Frontend\OrderController::class, 'downloadOrdersExcel'])
+    ->name('orders.download.excel');
+
+ 
+    Route::get('/orders/{order}/download/excel', [\App\Http\Controllers\Frontend\OrderController::class, 'downloadOrderExcel'])
+        ->name('orders.download.order.excel');
     // Cart
     // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     // Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Cart;
 use App\Models\OrderItem;
+use App\Services\OrderExportService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -71,8 +72,7 @@ class OrderController extends Controller
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
-        // Validate that a shipping address is provided.
-        $request->validate([
+         $request->validate([
             'shipping_address' => 'nullable|string'
         ]);
 
@@ -82,8 +82,7 @@ class OrderController extends Controller
             $total += $item->product->price * $item->quantity;
         }
 
-        // Use a transaction to ensure order and related items are created atomically.
-        DB::beginTransaction();
+         DB::beginTransaction();
         try {
             // Create the order.
             $order = Order::create([
@@ -93,7 +92,7 @@ class OrderController extends Controller
                 // 'shipping_address' => $request->input('shipping_address'),
             ]);
 
-            // Create order items for each cart item.
+ 
             foreach ($cartItems as $item) {
                 OrderItem::create([
                     'order_id'   => $order->id,
@@ -102,7 +101,7 @@ class OrderController extends Controller
                     'price'      => $item->product->price,
                 ]);
 
-                // Optionally update the product's stock quantity.
+ 
                 $item->product->decrement('stock_quantity', $item->quantity);
             }
 
@@ -137,5 +136,25 @@ class OrderController extends Controller
         $order->load('orderItems.product');
 
         return view('frontend.orders.show', compact('order'));
+    }
+
+
+    public function downloadOrdersExcel(OrderExportService $exportService)
+    {
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)->latest()->get();
+
+        return $exportService->exportOrders($orders);
+    }
+
+    
+    public function downloadOrderExcel(Order $order, OrderExportService $exportService)
+    {
+        $user = Auth::user();
+        if ($order->user_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return $exportService->exportOrderDetails($order);
     }
 }

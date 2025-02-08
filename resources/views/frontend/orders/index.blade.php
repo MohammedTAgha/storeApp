@@ -42,6 +42,7 @@
                             <td>{{ $order->created_at->format('M d, Y') }}</td>
                             <td>${{ $order->total }}</td>
                             <td><a href="{{ route('orders.show', $order->id) }}" class="btn">View</a></td>
+                            <td><a href="{{ route('orders.download.order.excel', $order->id) }}" class="btn">Download</a></td>
                         </tr>
                     @empty
                         <tr>
