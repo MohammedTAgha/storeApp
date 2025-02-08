@@ -2,6 +2,27 @@
 @include('layouts.frontend.partials.navbar')
 
 <main>
+    @if ($errors->any())
+    <div class="error-messages">
+        @foreach ($errors->all() as $error)
+            <p style="color: red;">{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
     <!-- hero slider section start -->
     <section class="hero-slider">
         <div class="container">
