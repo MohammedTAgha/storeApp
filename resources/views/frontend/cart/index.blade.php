@@ -109,7 +109,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="checkout.html" class="btn d-block">Proceed Checkout</a>
+                                <a href="{{route('orders.checkout')}}" class="btn d-block">Proceed Checkout</a>
                             </div>
                         </div>
                     </div>

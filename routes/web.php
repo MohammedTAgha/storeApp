@@ -51,6 +51,7 @@ Route::group(['namespace' => 'Frontend'], function () {
   
       // Orders
       Route::get('/orders', [FrontendOrderController::class, 'index'])->name('orders.index');
+      Route::get('/checkout', [FrontendOrderController::class, 'checkout'])->name('orders.checkout');
       Route::post('/orders', [FrontendOrderController::class, 'store'])->name('orders.store');
       Route::get('/orders/{order}', [FrontendOrderController::class, 'show'])->name('orders.show');
     // Cart
