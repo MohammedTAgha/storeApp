@@ -1,0 +1,104 @@
+i have change in my models 
+this is my models 
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'name', 'description', 'price', 'category_id', 'image_url', 'stock_quantity',
+    ];
+
+    
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+
+}
+class Cart extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'user_id',
+    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
+
+}
+class CartItem extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'cart_id', 'product_id', 'quantity',
+    ];
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+}
+class Order extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'user_id', 'total_amount', 'status', 'shipping_address',
+    ];
+
+    public function user() // each order belong to a user
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function orderItems() // order have emany items 
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+}
+class OrderItem extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'order_id', 'product_id', 'quantity', 'price',
+    ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+}

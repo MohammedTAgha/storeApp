@@ -8,15 +8,26 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    // public function index()
+    // {
+    //     // $cart = auth()->user()->cart;
+    //     return view('frontend.cart.index', compact('cart'));
+    // }
     public function index()
     {
-        // $cart = auth()->user()->cart;
-        return view('frontend.cart.index', compact('cart'));
-    }
+        $user = Auth::user();
+        // Get (or create) the current user's cart.
+        $cart = Cart::firstOrCreate(['user_id' => $user->id]);
 
+        // Load all cart items with their associated products.
+        $cartItems = $cart->cartItems()->with('product')->get();
+        dd($cartItems);
+        return view('frontend.cart.index', compact('cartItems'));
+    }
     public function store(Request $request, Product $product)
     {
         $request->validate([

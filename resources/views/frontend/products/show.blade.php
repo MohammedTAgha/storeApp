@@ -112,13 +112,17 @@
                                     <p>
                                         {{ $product->description }}
                                     </p>
+                                    
                                     <div class="quantity-cart-box d-flex align-items-center mb-20">
                                         <div class="quantity">
                                             <div class="pro-qty"><span class="dec qtybtn">-</span><input type="text"
                                                     value="1"><span class="inc qtybtn">+</span></div>
                                         </div>
-                                        <a href="cart.html" class="btn btn-default">Add To Cart</a>
+                                        <form action="{{route('cart.store',$product->id)}}" method="post">@csrf
+                                         <button type="submit"   class="btn btn-default">Add To Cart</button>
+                                        </form>
                                     </div>
+                                
                                     <div class="availability mb-20">
                                         <h5 class="cat-title">Availability:</h5>
                                         @if ($product->stock_quantity >0)
