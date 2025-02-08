@@ -20,5 +20,10 @@ class Cart extends Model
     {
         return $this->hasMany(CartItem::class);
     }
-
+    public function calculateTotalPrice()
+    {
+        return $this->cartItems->sum(function ($cartItem) {
+            return $cartItem->quantity * $cartItem->product->price;
+        });
+    }
 }

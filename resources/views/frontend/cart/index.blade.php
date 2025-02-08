@@ -42,50 +42,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-1.jpg" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Leather Mens Slipper</a></td>
-                                            <td class="pro-price"><span>$295.00</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty"><input type="text" value="1"></div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>$295.00</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-2.jpg" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Quickiin Mens Shoes</a></td>
-                                            <td class="pro-price"><span>$275.00</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty"><input type="text" value="2"></div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>$550.00</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-3.jpg" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Rexpo Womens Shoes</a></td>
-                                            <td class="pro-price"><span>$295.00</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="1" />
-                                                </div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>$295.00</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="assets/img/product/product-4.jpg" alt="Product" /></a></td>
-                                            <td class="pro-title"><a href="#">Primitive Mens Shoes</a></td>
-                                            <td class="pro-price"><span>$110.00</span></td>
-                                            <td class="pro-quantity">
-                                                <div class="pro-qty">
-                                                    <input type="text" value="3" />
-                                                </div>
-                                            </td>
-                                            <td class="pro-subtotal"><span>$110.00</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                        </tr>
+                                        
+                                        @if ($cartItems->isEmpty())
+                                            <tr>
+                                                <td colspan="6" class="text-center">Your cart is currently empty.</td>
+                                            </tr>
+                                        @else
+                                            @foreach ($cartItems as $item)
+                                                <tr>
+                                                    <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{ asset($item->product->image_url) }}" alt="{{ $item->product->name }}" /></a></td>
+                                                    <td class="pro-title"><a href="#">{{ $item->product->name }}</a></td>
+                                                    <td class="pro-price"><span>{{ $item->product->price }}</span></td>
+                                                    <td class="pro-quantity">
+                                                        <div class="pro-qty"><input type="text" value="{{ $item->quantity }}"></div>
+                                                    </td>
+                                                    <td class="pro-subtotal"><span>{{ $item->quantity * $item->product->price }}</span></td>
+                                                    <td class="pro-remove">
+                                                        <form action="{{ route('cart.destroy', $item->id) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" style="border: none; background: none;">
+                                                                <i class="fa fa-trash-o"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -113,7 +96,7 @@
                                         <table class="table">
                                             <tr>
                                                 <td>Sub Total</td>
-                                                <td>$230</td>
+                                                <td>${{$cart->calculateTotalPrice()}}</td>
                                             </tr>
                                             <tr>
                                                 <td>Shipping</td>
@@ -121,7 +104,7 @@
                                             </tr>
                                             <tr class="total">
                                                 <td>Total</td>
-                                                <td class="total-amount">$300</td>
+                                                <td class="total-amount">${{$cart->calculateTotalPrice() + 70}}</td>
                                             </tr>
                                         </table>
                                     </div>
