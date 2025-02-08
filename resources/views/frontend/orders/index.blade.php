@@ -7,6 +7,7 @@
         <div class="breadcrumb-wrap text-center">
             <nav aria-label="breadcrumb">
                 <h1 class="breadcrumb-title">My orders</h1>
+
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">My orders</li>
@@ -19,6 +20,8 @@
 <div class="tab-pane fade active show" id="orders" role="tabpanel">
     <div class="myaccount-content">
         <h3>Orders</h3>
+         <a href="{{ route('orders.download.excel') }}" class="btn">Download all</a> 
+
         <div class="myaccount-table table-responsive text-center">
             <table class="table table-bordered">
                 <thead class="thead-light">

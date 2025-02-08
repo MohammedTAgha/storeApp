@@ -26,6 +26,11 @@ Route::group([
     Route::resource('products', ProductController::class);
     Route::resource('orders', OrderController::class);
     Route::resource('users', UserController::class);
+    Route::get('/orders/download/excel', [\App\Http\Controllers\Frontend\OrderController::class, 'downloadOrdersExcel'])
+    ->name('orders.download.excel');
+
+    Route::get('/orders/{order}/download/excel', [\App\Http\Controllers\Frontend\OrderController::class, 'downloadOrderExcel'])
+    ->name('orders.download.order.excel');
 });
 
 

@@ -60,6 +60,12 @@
                         <span class="menu-title text-truncate"data-i18n="Home">categories</span>
                     </a>
                 </li>
+                <li class="{{ request()->routeIs('admin.orders.*') ? 'active' : '' }} nav-item">    <a class="d-flex align-items-center" href="{{ route('admin.orders.index') }}">
+                    <i data-feather="home">
+                    </i>
+                    <span class="menu-title text-truncate"data-i18n="Home">orders</span>
+                </a>
+            </li>
             </ul>
         </div>
     </div>
