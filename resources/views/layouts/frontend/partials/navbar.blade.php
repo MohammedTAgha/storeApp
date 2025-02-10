@@ -1,4 +1,19 @@
-    <!-- Start Header Area -->
+@php
+use App\Models\Category;
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Product;
+    $cats = Category::withCount('products')->get();
+    $user = Auth::user();
+ 
+ $cart = Cart::firstOrCreate(['user_id' => $user->id]);
+
+ $cartItems = $cart->cartItems()->with('product')->get();
+
+
+@endphp 
+
+ <!-- Start Header Area -->
     <header class="header-area">
         <!-- main header start -->
         <div class="main-header d-none d-lg-block">
@@ -59,87 +74,22 @@
                                     <!-- main menu navbar start -->
                                     <nav class="desktop-menu">
                                         <ul>
-                                            <li class="active"><a href="index.html">Home <i class="fa fa-angle-down"></i></a>
-                                                <ul class="dropdown">
+                                            <li class="active"><a href="{{route('dashboard')}}">Home </i></a>
+                                                {{-- <ul class="dropdown">
                                                     <li><a href="index.html">Home version 01</a></li>
                                                     <li><a href="index-2.html">Home version 02</a></li>
-                                                </ul>
+                                                </ul> --}}
                                             </li>
-                                            <li class="static"><a href="#">pages <i class="fa fa-angle-down"></i></a>
-                                                <ul class="megamenu dropdown">
-                                                    <li class="mega-title"><a href="#">column 01</a>
-                                                        <ul>
-                                                            <li><a href="shop.html">shop grid left
-                                                                    sidebar</a></li>
-                                                            <li><a href="shop-grid-right-sidebar.html">shop grid right
-                                                                    sidebar</a></li>
-                                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mega-title"><a href="#">column 02</a>
-                                                        <ul>
-                                                            <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="product-details-affiliate.html">product details affiliate</a></li>
-                                                            <li><a href="product-details-variable.html">product details variable</a></li>
-                                                            <li><a href="product-details-group.html">product details group</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mega-title"><a href="#">column 03</a>
-                                                        <ul>
-                                                            <li><a href="cart.html">cart</a></li>
-                                                            <li><a href="checkout.html">checkout</a></li>
-                                                            <li><a href="compare.html">compare</a></li>
-                                                            <li><a href="wishlist.html">wishlist</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="mega-title"><a href="#">column 04</a>
-                                                        <ul>
-                                                            <li><a href="my-account.html">my-account</a></li>
-                                                            <li><a href="login-register.html">login-register</a></li>
-                                                            <li><a href="contact-us.html">contact us</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="shop.html">shop <i class="fa fa-angle-down"></i></a>
+
+                                            <li><a href="{{route('products.index')}}">PRODUCTS <i class="fa fa-angle-down"></i></a>
                                                 <ul class="dropdown">
-                                                    <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="shop.html">shop grid left sidebar</a></li>
-                                                            <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
-                                                            <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
-                                                            <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                                            <li><a href="shop-list-full-width.html">shop list full width</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">products details <i class="fa fa-angle-right"></i></a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="product-details.html">product details</a></li>
-                                                            <li><a href="product-details-affiliate.html">product details affiliate</a></li>
-                                                            <li><a href="product-details-variable.html">product details variable</a></li>
-                                                            <li><a href="product-details-group.html">product details group</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
+                                                    <li><a href="{{route('products.index')}}">see all products</a></li>
+                                                    @foreach($cats as $category)
+                                                    <li><a  href="{{ route('admin.categories.show', $category->id) }}">{{ $category->name }} <span>({{ $category->products_count }})</span></a></li>
+                                                  @endforeach
+                                                                          </ul>
                                             </li>
-                                            <li><a href="blog-left-sidebar.html">Blog <i class="fa fa-angle-down"></i></a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                                    <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
-                                                    <li><a href="blog-grid-full-width.html">blog grid no sidebar</a></li>
-                                                    <li><a href="blog-details.html">blog details</a></li>
-                                                    <li><a href="blog-details-audio.html">blog details audio</a></li>
-                                                    <li><a href="blog-details-video.html">blog details video</a></li>
-                                                    <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
-                                                </ul>
-                                            </li>
+                                            <li><a href="{{route('orders.index')}}">my orders </a></li>
                                             <li><a href="contact-us.html">Contact us</a></li>
                                         </ul>
                                     </nav>
@@ -164,15 +114,15 @@
                                                 <i class="ion-ios-gear-outline"></i>
                                             </a>
                                             <ul class="dropdown-list">
-                                                <li><a href="login-register.html">login</a></li>
+                                                <li><a href="{{ route('login') }}">login</a></li>
                                                 <li><a href="login-register.html">register</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
+                                                <li><a  href="{{ route('myAccount') }}">my account</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="#" class="minicart-btn">
+                                            <a href="{{ route('cart.index' ) }}" class="minicart-btn">
                                                 <i class="ion-bag"></i>
-                                                <div class="notification">2</div>
+                                                <div class="notification">{{count($cartItems)}}</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -358,7 +308,7 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="myaccount">
-                                    <a class="dropdown-item" href="my-account.html">my account</a>
+                                    <a class="dropdown-item" href={{ route('myAccount') }}>my account</a>
                                     <a class="dropdown-item" href="login-register.html"> login</a>
                                     <a class="dropdown-item" href="login-register.html">register</a>
                                 </div>

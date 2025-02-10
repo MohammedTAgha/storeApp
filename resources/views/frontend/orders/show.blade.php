@@ -89,7 +89,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <a href="{{route('orders.checkout')}}" class="btn d-block">DOWNLOAD ORDER</a>
+                                <a href="{{route('orders.download.order.excel',$order->id)}}" class="btn d-block">DOWNLOAD ORDER</a>
                             </div>
                         </div>
                     </div>

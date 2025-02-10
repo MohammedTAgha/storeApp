@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('frontend.home.index');
 // });
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+// Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/myaccount', [HomeController::class, 'myAccount'])->name('myAccount');
 
 Route::group([
     'prefix' => 'admin',
@@ -47,7 +49,9 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/products', [FrontendProductController::class, 'index'])->name('products.index');
     Route::get('/products/{product}', [FrontendProductController::class, 'show'])->name('products.show');
 
-
+    Route::middleware(['auth'])->group(function () {
+        
+   
       // Cart
       Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
       Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
@@ -63,9 +67,11 @@ Route::group(['namespace' => 'Frontend'], function () {
       Route::get('/orders/download/excel', [\App\Http\Controllers\Frontend\OrderController::class, 'downloadOrdersExcel'])
     ->name('orders.download.excel');
 
- 
     Route::get('/orders/{order}/download/excel', [\App\Http\Controllers\Frontend\OrderController::class, 'downloadOrderExcel'])
         ->name('orders.download.order.excel');
+    });
+
+
     // Cart
     // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     // Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');

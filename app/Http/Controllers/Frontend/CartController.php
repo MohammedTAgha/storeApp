@@ -19,11 +19,11 @@ class CartController extends Controller
     // }
     public function index()
     {
-        $user = Auth::user();
- 
-        $cart = Cart::firstOrCreate(['user_id' => $user->id]);
- 
-        $cartItems = $cart->cartItems()->with('product')->get();
+            $user = Auth::user();
+    
+            $cart = Cart::firstOrCreate(['user_id' => $user->id]);
+    
+            $cartItems = $cart->cartItems()->with('product')->get();
         // dd($cartItems);
         return view('frontend.cart.index', compact('cartItems', 'cart'));
     }

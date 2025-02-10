@@ -24,77 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <!-- Checkout Login Coupon Accordion Start -->
-                <div class="checkoutaccordion" id="checkOutAccordion">
-                    <div class="card">
-                        <h5>Returning Customer? <span data-toggle="collapse" data-target="#logInaccordion">Click
-                                    Here To Login</span></h5>
-                        <div id="logInaccordion" class="collapse" data-parent="#checkOutAccordion">
-                            <div class="card-body">
-                                <p>If you have shopped with us before, please enter your details in the boxes
-                                    below. If you are a new customer, please proceed to the Billing &amp;
-                                    Shipping section.</p>
-                                <div class="login-reg-form-wrap mt-20">
-                                    <div class="row">
-                                        <div class="col-lg-7 m-auto">
-                                            <form action="#" method="post">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="single-input-item">
-                                                            <input type="email" placeholder="Enter your Email" required="">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-12">
-                                                        <div class="single-input-item">
-                                                            <input type="password" placeholder="Enter your Password" required="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="single-input-item">
-                                                    <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                                        <div class="remember-meta">
-                                                            <div class="custom-control custom-checkbox">
-                                                                <input type="checkbox" class="custom-control-input" id="rememberMe" required="">
-                                                                <label class="custom-control-label" for="rememberMe">Remember
-                                                                    Me</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <a href="#" class="forget-pwd">Forget Password?</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="single-input-item">
-                                                    <button class="btn btn-sqr">Login</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h5>Have A Coupon? <span data-toggle="collapse" data-target="#couponaccordion">Click
-                            Here To Enter Your Code</span></h5>
-                        <div id="couponaccordion" class="collapse" data-parent="#checkOutAccordion">
-                            <div class="card-body">
-                                <div class="cart-update-option">
-                                    <div class="apply-coupon-wrapper">
-                                        <form action="#" method="post" class=" d-block d-md-flex">
-                                            <input type="text" placeholder="Enter Your Coupon Code" required="">
-                                            <button class="btn btn-sqr">Apply Coupon</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Checkout Login Coupon Accordion End -->
+                 
             </div>
         </div>
         <div class="row">
@@ -292,26 +222,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($cartItems as $item )
                                     <tr>
-                                        <td><a href="product-details.html">Suscipit Vestibulum <strong> × 1</strong></a>
+                                        <td><a href="product-details.html">{{$item->product->name}}<strong> × {{$item->quantity}}</strong></a>
                                         </td>
-                                        <td>$165.00</td>
+                                        <td>${{$item->calculateTotalPrice()}}</td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="product-details.html">Ami Vestibulum suscipit <strong> × 4</strong></a>
-                                        </td>
-                                        <td>$165.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="product-details.html">Vestibulum suscipit <strong> × 2</strong></a>
-                                        </td>
-                                        <td>$165.00</td>
-                                    </tr>
+                                    @endforeach
+                                    
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td>Sub Total</td>
-                                        <td><strong>$400</strong></td>
+                                        <td><strong>${{$cart->calculateTotalPrice()}}</strong></td>
                                     </tr>
                                     <tr>
                                         <td>Shipping</td>
@@ -336,7 +260,7 @@
                                     </tr>
                                     <tr>
                                         <td>Total Amount</td>
-                                        <td><strong>$470</strong></td>
+                                        <td><strong>${{$cart->calculateTotalPrice() + 70}}</strong></td>
                                     </tr>
                                 </tfoot>
                             </table>

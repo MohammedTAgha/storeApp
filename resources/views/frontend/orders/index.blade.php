@@ -33,23 +33,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- <tr>
-                        <td>1</td>
-                        <td>Aug 22, 2018</td>
-                        <td>$3000</td>
-                        <td><a href="cart.html" class="btn ">View</a></td>
-                    </tr> --}}
                     @forelse ($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->created_at->format('M d, Y') }}</td>
-                            <td>${{ $order->total }}</td>
-                            <td><a href="{{ route('orders.show', $order->id) }}" class="btn">View</a></td>
-                            <td><a href="{{ route('orders.download.order.excel', $order->id) }}" class="btn">Download</a></td>
+                            <td>${{ $order->calculateTotalPrice() }}</td>
+                            <td><a href="{{ route('orders.show', $order->id) }}" class="btn">View</a> <a href="{{ route('orders.download.order.excel', $order->id) }}" class="btn">Download</a></td>
+                            {{-- <td></td> --}}
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">You don't have any orders yet.</td>
+                            <td colspan="4">no orders yet.</td>
                         </tr>
                     @endforelse
 

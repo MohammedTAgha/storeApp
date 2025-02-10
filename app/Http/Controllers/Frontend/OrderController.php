@@ -29,8 +29,10 @@ class OrderController extends Controller
 
     public function checkout()
     {
-      
-        return view('frontend.orders.checkout');
+        $user = Auth::user();
+        $cart = Cart::firstOrCreate(['user_id' => $user->id]);
+        $cartItems = $cart->cartItems()->with('product')->get();
+        return view('frontend.orders.checkout',compact('cart','cartItems'));
     }
 
     // public function store(Request $request)
@@ -88,7 +90,7 @@ class OrderController extends Controller
             $order = Order::create([
                 'user_id'          => $user->id,
                 'total_amount'     => $total,
-                'status'           => 'pending', // or other status as needed
+                'status'           => 'pending', 
                 // 'shipping_address' => $request->input('shipping_address'),
             ]);
 
@@ -105,7 +107,7 @@ class OrderController extends Controller
                 $item->product->decrement('stock_quantity', $item->quantity);
             }
 
-            // Clear all items from the user's cart.
+            // Clear cart
             $cart->cartItems()->delete();
 
             DB::commit();
@@ -115,7 +117,7 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->route('cart.index')
-                ->with('error', 'Failed to place order. Please try again.');
+                ->with('error', 'Failed to place order. '.$e->getMessage());
         }
     }
     // public function show(Order $order)
