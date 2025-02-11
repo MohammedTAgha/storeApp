@@ -6,9 +6,11 @@ use App\Models\Product;
     $cats = Category::withCount('products')->get();
     $user = Auth::user();
  
- $cart = Cart::firstOrCreate(['user_id' => $user->id]);
+    if ($user) {
+        $cart = Cart::firstOrCreate(['user_id' => $user->id]);
 
- $cartItems = $cart->cartItems()->with('product')->get();
+    $cartItems = $cart->cartItems()->with('product')->get();
+    }
 
 
 @endphp 
@@ -122,7 +124,10 @@ use App\Models\Product;
                                         <li>
                                             <a href="{{ route('cart.index' ) }}" class="minicart-btn">
                                                 <i class="ion-bag"></i>
+                                                
+                                                @if ($user)
                                                 <div class="notification">{{count($cartItems)}}</div>
+                                                @endif
                                             </a>
                                         </li>
                                     </ul>
