@@ -49,7 +49,7 @@
                 <div class="col-xl-4 col-md-6 col-12">
                     <div class="mb-1">
                         <label class="form-label" for="image_url">Product Image</label>
-                        <input type="file" class="form-control" id="image_url" name="image_url" required>
+                        <input type="file" class="form-control" id="image_url" name="image_url">
                     </div>
                 </div>
                 <div class="col-12">

@@ -59,9 +59,6 @@
                         <label class="form-label" for="image_url">Product Image</label>
                         <input type="file" class="form-control" id="image_url" name="image_url">
                         <small class="text-muted">Leave blank to keep the current image</small>
-                        <div class="mt-2">
-                            <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}" class="img-fluid" width="100">
-                        </div>
                     </div>
                 </div>
                 <div class="col-12">

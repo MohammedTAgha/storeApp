@@ -16,8 +16,8 @@
                 <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
                         id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">Shaban
-                                Sabbah</span><span class="user-status">Admin</span></div>
+                        <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">admin
+                                 </span><span class="user-status">Admin</span></div>
 
                         <span class="avatar">
                              

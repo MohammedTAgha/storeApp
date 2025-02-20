@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        // dd($request);
         // $request->validate([$request->all()]);
         $request->validate([
             'name' => 'required|string|max:255',
@@ -39,7 +39,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|',
             'stock_quantity' => 'required|integer',
-            'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_url' => 'required|image|max:2048',
         ]);
 
           // Handle image upload
@@ -85,10 +85,10 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'stock_quantity' => 'required|integer',
-           'image_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:19048',
+           'image_url' => 'image|max:19048',
         ]);
 
-        if ($request->hasFile('image_url')) {
+         if ($request->hasFile('image_url')) {
             $image = $request->file('image_url');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/products'), $imageName);
